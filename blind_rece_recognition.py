@@ -14,16 +14,27 @@ while True:
     # 얼굴 위치 검출
     face_locations = face_recognition.face_locations(frame)
     
-    # 얼굴 위치를 그려줍니다.
-    for top, right, bottom, left in face_locations:
-        cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
-    
-    # 얼굴 위치가 검출된 이미지 미리보기
-    cv2.imshow('Webcam', frame)
-    
-    # q 키가 입력되면 종료합니다.
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+    # 얼굴이 찾아지지 않으면 원본 영상을 그대로 출력합니다.
+    if len(face_locations) == 0:
+        cv2.imshow("Webcam", frame)
+    else:
+        # 얼굴이 찾아지면 얼굴 영역을 차단한 새로운 이미지를 생성합니다.
+        # face_mask = frame.copy()
+        # for (x, y, w, h) in face_locations:
+        #     cv2.rectangle(face_mask, (x, y), (x+w, y+h), (0, 0, 0), -1)
+            
+        # 얼굴 위치를 그려줍니다.
+        for top, right, bottom, left in face_locations:
+            cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 0), -1)
+        # for top, right, bottom, left in face_locations:
+        #     cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
+        
+        # 얼굴 위치가 검출된 이미지 미리보기
+        cv2.imshow('Webcam', frame)
+        
+        # q 키가 입력되면 종료합니다.
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
 # 웹캠 연결 해제
 webcam.release()
