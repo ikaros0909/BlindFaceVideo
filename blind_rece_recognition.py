@@ -18,11 +18,6 @@ while True:
     if len(face_locations) == 0:
         cv2.imshow("Webcam", frame)
     else:
-        # 얼굴이 찾아지면 얼굴 영역을 차단한 새로운 이미지를 생성합니다.
-        # face_mask = frame.copy()
-        # for (x, y, w, h) in face_locations:
-        #     cv2.rectangle(face_mask, (x, y), (x+w, y+h), (0, 0, 0), -1)
-            
         # 얼굴 위치를 그려줍니다.
         for top, right, bottom, left in face_locations:
             cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 0), -1)
