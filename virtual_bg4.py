@@ -1,8 +1,16 @@
 import cv2
 import mediapipe as mp
 import numpy as np
+import tensorflow as tf
 mp_drawing = mp.solutions.drawing_utils
 mp_selfie_segmentation = mp.solutions.selfie_segmentation
+
+#GPU사용
+physical_devices = tf.config.experimental.list_physical_devices('GPU')
+tf.config.experimental.set_memory_growth(physical_devices[0], True)
+
+#CPU사용
+tf.config.experimental.set_visible_devices([], 'GPU')
 
 # For static images:
 IMAGE_FILES = []
